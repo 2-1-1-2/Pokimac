@@ -43,7 +43,8 @@ document.getElementById("add").onclick = function create() {
         },
         body: JSON.stringify({ 'pokimac': pokimacDresseur }),
     });
-    document.location.href = "PokimacDresseur";
+
+    alert("enregistré !");
 
 }
 
