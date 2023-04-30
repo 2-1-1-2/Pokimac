@@ -3,6 +3,7 @@
 ## Pré-requis
 `pip3 install Flask-Cors`
 `sudo apt install mysql-server`
+`pip install mysql-connector-python`
 
 ### Mysql
 créer le profil pour la base de donner : 
@@ -26,9 +27,9 @@ Mode debug : `flask --app server.py --debug run`
 - [ ] Création pokimac
 - [ ] Modification pokimac
 - [ ] Quitter pokimac
+- [ ] afficher pokimac (pokedex)
 
 ### Pokimacdex (Marion)
-- [ ] afficher pokimac (pokedex)
 - tri 
     - [ ] Ordre alphabétique
     - [ ] Par type
