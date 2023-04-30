@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, redirect, request, render_template, jsonify, abort
+from flask import Flask, redirect, url_for, request, render_template, jsonify, abort
 from flask_cors import CORS
 import mysql.connector
 import csv
@@ -92,7 +92,7 @@ def afficherDresseur():
 
     for x in myresult:
         x = list(x)
-        x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
+        #x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
         if (x[2] == None):
             x[2] = ""
         x[3] = requestSelect_From("types", "name", "id", x[3])
@@ -142,7 +142,8 @@ def ajouterDresseur():
     mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""", (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
     mydb.commit()
     mycursor.close()
-    return redirect("/")
+    print("Redirecting to /PokimacDresseur")
+    return redirect('/PokimacDresseur') 
 
 
 @ app.route("/modifierPokimacDresseur")
@@ -155,7 +156,7 @@ def modifierDresseur():
 def supprimerDresseur():
     pokimac = request.args.get('pokimac')
     mycursor = mydb.cursor()
-    mycursor.execute("""DELETE FROM dresseurs WHERE id='%s'""", pokimac)
+    mycursor.execute("""DELETE FROM dresseurs WHERE id=%s""", [pokimac])
     mydb.commit()
     mycursor.close()
     return redirect("/PokimacDresseur")

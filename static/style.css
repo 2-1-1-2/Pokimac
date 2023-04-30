@@ -48,7 +48,7 @@ table {
 .btn {
 	margin: 0.5vh;
 	padding: 0.5em;
-	position: absolute;
+	position: relative;
 	left: 50%;
 	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
