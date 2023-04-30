@@ -37,7 +37,7 @@ Mode debug : `flask --app server.py --debug run`
 ---
 
 #### Pokimac dresseurs (Tanya) - Amélioration : 
-- [ ] type correspond au pokémon choisi
+- [ ] pokémon choisi correspond au type sélectionné
 - [ ] Pouvoir ajouter les team dès l'inscription
 
 #### Pokimacdex (Marion)
