@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Pokimac</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<script src="./app.js" defer></script>
+	<script src="{{ url_for('static', filename='form.js') }}" defer=""></script>
 </head>
 
 <body>
@@ -33,18 +33,18 @@
 				<!-- <td>Team</td> -->
 				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025" required></td>
 				<td><select name="pokemon_totem_id" id="pokemon_totem_id" required>
-					
-					{% for pokemon in Pokemon_aff %}
+
+						{% for pokemon in Pokemon_aff %}
 						{% for value in pokemon %}
 						<option value="{{value}}">{{value}}</option>
 						{% endfor %}
-					{% endfor %}
-				</select></td>
+						{% endfor %}
+					</select></td>
 			</tr>
-			
+
 		</table>
 
-		<button class="btn" href="">ajouter Pokimac dresseur</button>
+		<button class="btn" id="add">Ajouter</button>
 	</div>
 
 

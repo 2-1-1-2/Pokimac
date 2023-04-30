@@ -26,26 +26,32 @@ Mode debug : `flask --app server.py --debug run`
 
 ## Taches et répartitions
 
-### Pokimac dresseurs (Tanya)
+### Pour la V1
 
-- [ ] Création pokimac dresseur
+#### Pokimac dresseurs (Tanya)
+
+- [x] Création pokimac dresseur
 - [ ] Supprimer pokimac dresseur
 - [x] afficher pokimac (pokedex)
 
-### Pokimacdex (Marion)
+---
 
+#### Pokimac dresseurs (Tanya) - Amélioration : 
+- [ ] type correspond aux pokémons choisi
+
+#### Pokimacdex (Marion)
 - [ ] Modification pokimac dresseur
 - tri
   - [ ] Ordre alphabétique
   - [ ] Par type
 
-### Affichage (Sara et/ou Nolwenn)
+#### Affichage (Sara et/ou Nolwenn)
 
 - [ ] afficher individuellement pokimac
 - [ ] affichage par équipe
 - [ ] Supprimer équipe
 
-### Equipe (Sara et/ou Nolwenn)
+#### Equipe (Sara et/ou Nolwenn)
 
 - [ ] Création équipe
 - [ ] Modification équipe

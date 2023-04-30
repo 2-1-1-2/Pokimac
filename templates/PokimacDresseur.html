@@ -7,14 +7,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Pokimac</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<script src="./app.js" defer></script>
+	<script src="{{url_for('static', filename='app.js')}}"></script>
+
 </head>
 
 <body>
 	<a href="https://pokeapi.co/api/v2/">test</a>
 	<div class="container">
 		<table>
-			<tr><th>ID</th>
+			<tr>
+				<th>ID</th>
 				<th>Nom</th>
 				<th>Team</th>
 				<th>Type</th>
@@ -22,14 +24,14 @@
 				<th>Pokémon totem</th>
 			</tr>
 			{% for pokimac in PokimacDresseur_aff %}<tr></tr>
-			{% for value in pokimac %}				
-				<td>{{value}}</td>			
+			{% for value in pokimac %}
+			<td>{{value}}</td>
 			{% endfor %}
 			</tr>
 			{% endfor %}
 		</table>
 
-		<a href="PokimacDresseurForm"><button class="btn" >ajouter Pokimac dresseur</button></a>
+		<a href="PokimacDresseurForm"><button class="btn">ajouter Pokimac dresseur</button></a>
 	</div>
 
 
