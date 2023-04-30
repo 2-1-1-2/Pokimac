@@ -14,21 +14,17 @@
 	<a href="https://pokeapi.co/api/v2/">test</a>
 	<div class="container">
 		<table>
-			<tr>
+			<tr><th>ID</th>
 				<th>Nom</th>
 				<th>Team</th>
-				<th>Promotion IMAC</th>
 				<th>Type</th>
+				<th>Promotion IMAC</th>
 				<th>Pokémon totem</th>
-				<th>Pokéball</th>
 			</tr>
-			{% for pokimac in pokimac_aff %}
-			<tr>
-				<td>Nom : </td>
-				<td>Team : </td>
-				<td>Promotion IMAC : </td>
-				<td>Pokémon totem : </td>
-				<td>Pokéball : </td>
+			{% for pokimac in PokimacDresseur_aff %}<tr></tr>
+			{% for value in pokimac %}				
+				<td>{{value}}</td>			
+			{% endfor %}
 			</tr>
 			{% endfor %}
 		</table>
