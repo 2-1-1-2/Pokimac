@@ -31,13 +31,14 @@ Mode debug : `flask --app server.py --debug run`
 #### Pokimac dresseurs (Tanya)
 
 - [x] Création pokimac dresseur
-- [ ] Supprimer pokimac dresseur
+- [x] Supprimer pokimac dresseur
 - [x] afficher pokimac (pokedex)
 
 ---
 
 #### Pokimac dresseurs (Tanya) - Amélioration : 
-- [ ] type correspond aux pokémons choisi
+- [ ] type correspond au pokémon choisi
+- [ ] Pouvoir ajouter les team dès l'inscription
 
 #### Pokimacdex (Marion)
 - [ ] Modification pokimac dresseur
@@ -56,3 +57,6 @@ Mode debug : `flask --app server.py --debug run`
 - [ ] Création équipe
 - [ ] Modification équipe
 - [ ] Quitter équipe
+
+#### Bonus
+- [ ] Système de compte avec 1 dresseurs par compte
