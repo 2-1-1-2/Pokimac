@@ -65,13 +65,24 @@ def index():
     return render_template("index.html")
 
 
-# Dresseurs
-def requestSelect_FromId(id, table, column):
-    cursorPokemon = mydb.cursor()
-    cursorPokemon.execute(f"SELECT {column} FROM {table} WHERE id={id};")
-    myresultPokemon = cursorPokemon.fetchone()
-    cursorPokemon.close()
-    return myresultPokemon[0]
+def requestSelect_From(table, column, where, value):
+    cursor = mydb.cursor()
+    cursor.execute(
+        f"SELECT {column} FROM {table} WHERE {where}={value};")
+    result = cursor.fetchone()
+    cursor.close()
+    return result[0]
+
+
+def requestSelectColumn(table, column, where="", value="", condition=False):
+    cursor = mydb.cursor()
+    if (condition):
+        cursor.execute(f"SELECT {column} FROM {table} WHERE {where}={value};")
+    else:
+        cursor.execute(f"SELECT {column} FROM {table};")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
 
 
 @ app.route("/PokimacDresseur")
@@ -85,12 +96,26 @@ def afficherDresseur():
         x = list(x)
         if (x[2] == None):
             x[2] = ""
-        x[3] = requestSelect_FromId(x[3], "types", "name")
-        x[5] = requestSelect_FromId(x[5], "pokemons", "name")
+        x[3] = requestSelect_From("types", "name", "id", x[3])
+        x[5] = requestSelect_From("pokemons", "name", "id", x[5])
         affichage_dresseur.append(x)
 
     mycursor.close()
     return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+
+
+@ app.route("/PokimacDresseurForm")
+def formDresseur():
+    affichage_pokemon = []
+    affichage_type = []
+    myresultPokemon = requestSelectColumn("pokemons", "name")
+    for x in myresultPokemon:
+        affichage_pokemon.append(x)
+
+    myresultType = requestSelectColumn("types", "name")
+    for x in myresultType:
+        affichage_type.append(x)
+    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
 
 
 @ app.route("/ajouterPokimacDresseur")

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Pokimac</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script src="./app.js" defer></script>
+</head>
+
+<body>
+	<div class="container">
+		<table>
+			<tr>
+				<th>Nom</th>
+				<!-- <th>Team</th> -->
+				<th>Type</th>
+				<th>Promotion IMAC</th>
+				<th>Pokémon totem</th>
+			</tr>
+			<tr>
+				<td><input type="text" name="username" id="username" required></td>
+				<td><select name="type_id" id="type_id" required>
+						{% for type in Type_aff %}
+						{% for value in type %}
+						<option value="{{value}}">{{value}}</option>
+						{% endfor %}
+						{% endfor %}
+					</select>
+				</td>
+				<!-- <td>Team</td> -->
+				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025" required></td>
+				<td><select name="pokemon_totem_id" id="pokemon_totem_id" required>
+					
+					{% for pokemon in Pokemon_aff %}
+						{% for value in pokemon %}
+						<option value="{{value}}">{{value}}</option>
+						{% endfor %}
+					{% endfor %}
+				</select></td>
+			</tr>
+			
+		</table>
+
+		<button class="btn" href="">ajouter Pokimac dresseur</button>
+	</div>
+
+
+
+</body>
+
+</html>
