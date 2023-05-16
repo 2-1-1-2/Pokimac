@@ -62,4 +62,4 @@ Mode debug : `flask --app server.py --debug run`
 
 #### Bonus
 
-- [ ] Système de compte avec 1 dresseurs par compte
+- [ ] Système de compte avec 1 dresseur par compte
