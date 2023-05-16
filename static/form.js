@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 let input = document.getElementById("name");
 input.test;
 */
-/*
-document.getElementById("username").addEventListener("change", choix_pokemon())
+
+
+document.getElementById("type_id").addEventListener("click", choix_pokemon)
+
 
 async function choix_pokemon() {
     const type_id = document.getElementById("type_id").value;
@@ -25,7 +27,29 @@ async function choix_pokemon() {
         body: JSON.stringify({ type: type_id }),
     });
 
-}*/
+    const data = await response.json();
+
+    changeData(data)
+
+}
+
+function changeData(data) {
+    //console.log(data)
+    let pokemon_totem_id = document.getElementById("pokemon_totem_id")
+    //pokemon_totem_id
+    console.log(data["Pokemon_aff"])
+    pokemon_totem_id.innerHTML = "";
+    let test = ""
+    data["Pokemon_aff"].forEach(element => {
+        test += ` <option value='${element}'>${element}</option> `
+
+    });
+
+    console.log(test)
+    pokemon_totem_id.innerHTML = test;
+
+
+}
 
 document.getElementById("add").onclick = function create() {
     console.log("ça marche");

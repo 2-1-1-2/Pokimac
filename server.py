@@ -13,6 +13,11 @@ mydb = mysql.connector.connect(
 )
 
 
+def toTeam(trainer, team):
+    mycursor = mydb.cursor()
+    mycursor.close()
+
+
 def requestInsert(table, head):
     return (
         f"INSERT IGNORE INTO {table} " +
@@ -75,7 +80,8 @@ def requestSelect_From(table, column, where, value):
 def requestSelectColumn(table, column, where="", value="", condition=False):
     cursor = mydb.cursor()
     if (condition):
-        cursor.execute(f"SELECT {column} FROM {table} WHERE {where}='{value}';")
+        cursor.execute(
+            f"SELECT {column} FROM {table} WHERE {where}='{value}';")
     else:
         cursor.execute(f"SELECT {column} FROM {table};")
     result = cursor.fetchall()
@@ -92,7 +98,7 @@ def afficherDresseur():
 
     for x in myresult:
         x = list(x)
-        #x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
+        # x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
         if (x[2] == None):
             x[2] = ""
         x[3] = requestSelect_From("types", "name", "id", x[3])
@@ -103,47 +109,60 @@ def afficherDresseur():
     return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
 
 
-@ app.route("/PokimacDresseurForm")
+@ app.route("/PokimacDresseurForm", methods=['GET', 'POST'])
 def formDresseur():
     affichage_pokemon = []
     affichage_type = []
-    """
+    affichage_team = []
+
     if request.method == 'POST':
         type = request.json["type"]
         print(type)
         idType = requestSelect_From("types", "id", "name", type)
-        myresultPokemon = requestSelectColumn("types", "name", "id", idType, True)
+        myresultPokemon = requestSelectColumn(
+            "pokemons", "name", "type_0", type, True)
+
         for x in myresultPokemon:
+            print(x)
             affichage_pokemon.append(x)
 
         myresultType = requestSelectColumn("types", "name")
         for x in myresultType:
             affichage_type.append(x)
-        data = {affichage_pokemon, affichage_type}
+        # data = {affichage_pokemon, affichage_type}
         return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type), 201
-    """
-    myresultPokemon = requestSelectColumn("pokemons", "name")
-    for x in myresultPokemon:
-        affichage_pokemon.append(x)
 
     myresultType = requestSelectColumn("types", "name")
     for x in myresultType:
         affichage_type.append(x)
-    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
 
+    myresulTeam = requestSelectColumn("equipe_dresseurs", "nom")
+    for x in myresulTeam:
+        affichage_team.append(x)
+
+    myresultPokemon = requestSelectColumn(
+        "pokemons", "name", "type_0", affichage_type[0][0], True)
+    for x in myresultPokemon:
+        affichage_pokemon.append(x)
+    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
 
 
 @ app.route("/ajouterPokimacDresseur", methods=['POST'])
 def ajouterDresseur():
     pokimac = request.json["pokimac"]
     mycursor = mydb.cursor()
-    pokimac["type_id"] = requestSelect_From("types", "id", "name", pokimac["type_id"])
-    pokimac["pokemon_totem_id"] = requestSelect_From("pokemons", "id", "name", pokimac["pokemon_totem_id"])
-    mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""", (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
+    pokimac["type_id"] = requestSelect_From(
+        "types", "id", "name", pokimac["type_id"])
+    pokimac["pokemon_totem_id"] = requestSelect_From(
+        "pokemons", "id", "name", pokimac["pokemon_totem_id"])
+    mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""",
+                     (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
+
     mydb.commit()
     mycursor.close()
+    toTeam(pokimac["username"], pokimac["team"])
     print("Redirecting to /PokimacDresseur")
-    return redirect('/PokimacDresseur') 
+    return redirect('/PokimacDresseur')
 
 
 @ app.route("/modifierPokimacDresseur")

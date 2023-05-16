@@ -19,6 +19,9 @@ s'il y a un problème avec le mot de passe :
 SQL :
 `ALTER USER 'IMAC'@'localhost' IDENTIFIED WITH mysql_native_password BY 'IMAC@2025@3490';`
 
+Pour avoir les droits :
+`GRANT ALL PRIVILEGES ON * . * TO 'IMAC'@'localhost';`
+
 ## Lancer le programme
 
 Mode normal : `flask --app server.py run`
@@ -38,8 +41,8 @@ Mode debug : `flask --app server.py --debug run`
 
 #### Pokimac dresseurs (Tanya) - Amélioration :
 
-- [ ] pokémon choisi correspond au type sélectionné
-- [ ] Pouvoir ajouter les team dès l'inscription
+- [x] pokémon choisi correspond au type sélectionné
+- [ ] Pouvoir ajouter les team dès l'inscription (toTeam())
 
 #### Pokimacdex (Marion)
 
@@ -63,3 +66,10 @@ Mode debug : `flask --app server.py --debug run`
 #### Bonus
 
 - [ ] Système de compte avec 1 dresseur par compte
+
+#### Autres
+
+- [ ] Changer equipe_dresseurs => teams
+- [ ] Changer teams.nom => teams.name
+- [ ] Changer dresseurs => trainers
+- [ ] Dans l'affichage équipe : lien menant au profil sur les noms
