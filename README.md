@@ -24,7 +24,7 @@ SQL :
 Mode normal : `flask --app server.py run`
 Mode debug : `flask --app server.py --debug run`
 
-## Taches et répartitions
+## Tâches et répartitions
 
 ### Pour la V1
 
@@ -32,13 +32,13 @@ Mode debug : `flask --app server.py --debug run`
 
 - [x] Création pokimac dresseur
 - [x] Supprimer pokimac dresseur
-- [x] afficher pokimac (pokedex)
+- [x] Afficher pokimac (pokedex)
 
 ---
 
 #### Pokimac dresseurs (Tanya) - Amélioration :
 
-- [ ] pokémon choisi correspond au type sélectionné
+- [ ] Pokémon choisi correspond au type sélectionné
 - [ ] Pouvoir ajouter les team dès l'inscription
 
 #### Pokimacdex (Marion)
@@ -50,7 +50,7 @@ Mode debug : `flask --app server.py --debug run`
 
 #### Affichage (Sara)
 
-- [ ] afficher individuellement pokimac
+- [ ] Afficher individuellement pokimac
 - [ ] affichage par équipe
 - [ ] Supprimer équipe
 

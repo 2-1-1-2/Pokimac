@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Equipe</title>
+</head>
+
+<body>
+    <div class="container">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Nom</th>
+			</tr>
+			{% for pokimac in PokimacDresseur_aff %}<tr></tr>
+
+			{% for value in pokimac %}
+
+			<td>{% if loop.index == 1 %}
+				<a href="/supprimerMembre?pokimac={{value}}">X</a>
+				{% else %}
+				{{value}}
+				{% endif %}
+
+			</td>
+			{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+
+		<a href="EquipeMembreForm"><button class="btn">ajouter membre équipe</button></a>
+	</div>
+</body>
+
+</html>
