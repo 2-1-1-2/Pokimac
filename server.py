@@ -102,6 +102,23 @@ def afficherDresseur():
     mycursor.close()
     return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
 
+@ app.route("/PokimacDresseurFiche")
+def afficherDresseur():
+    affichage_dresseur = []
+    mycursor = mydb.cursor()
+    mycursor.execute(requestSelectAll("dresseurs"))
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        x = list(x)
+        if (x[2] == None):
+            x[2] = ""
+        x[3] = requestSelect_From("types", "name", "id", x[3])
+        x[5] = requestSelect_From("pokemons", "name", "id", x[5])
+        affichage_dresseur.append(x)
+
+    mycursor.close()
+    return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
 
 @ app.route("/PokimacDresseurForm")
 def formDresseur():
