@@ -8,7 +8,7 @@
 
 ### Mysql
 
-créer le profil pour la base de donner :
+créer le profil pour la base de donnée :
 `CREATE USER 'IMAC'@'localhost' IDENTIFIED WITH mysql_native_password BY 'IMAC@2025@3490';`
 
 ou
@@ -36,11 +36,13 @@ Mode debug : `flask --app server.py --debug run`
 
 ---
 
-#### Pokimac dresseurs (Tanya) - Amélioration : 
+#### Pokimac dresseurs (Tanya) - Amélioration :
+
 - [ ] pokémon choisi correspond au type sélectionné
 - [ ] Pouvoir ajouter les team dès l'inscription
 
 #### Pokimacdex (Marion)
+
 - [ ] Modification pokimac dresseur
 - tri
   - [ ] Ordre alphabétique
@@ -59,4 +61,5 @@ Mode debug : `flask --app server.py --debug run`
 - [ ] Quitter équipe
 
 #### Bonus
+
 - [ ] Système de compte avec 1 dresseurs par compte
