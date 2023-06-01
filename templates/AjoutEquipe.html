@@ -18,8 +18,14 @@
             </tr>
             <tr>
                 <td><input type="text" name="nom" id="nom" required></td>
-                    </select>
-                </td>
+                    <select name="pokemon_totem_id" id="pokemon_totem_id" required>
+
+                    {% for pokimac in PokimacEquipe_aff %}
+                    {% for value in pokemon %}
+                    <option value="{{value}}">{{value}}</option>
+                    {% endfor %}
+                    {% endfor %}
+                </select></td>
                 <!-- <td>Team</td> -->
             </tr>
 
