@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokimac</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='form.js') }}" defer=""></script>
+    <link rel="stylesheet" href="{{{{ url_for('static', filename='style.css') }}}}">
+    <script src="{{{{ url_for('static', filename='form.js') }}}}" defer=""></script>
 </head>
 
 <body>
     <div class="container">
-        ID : {ficheDresseur[0]}
-        Nom : {ficheDresseur[1]}
-        Team : {ficheDresseur[2]}
-        Type : {ficheDresseur[3]}
-        Promotion IMAC : {ficheDresseur[4]}
-        Pokémon totem : {ficheDresseur[5]}
+        ID : {{ficheDresseur[0]}}
+        Nom : {{ficheDresseur[1]}}
+        Team : {{ficheDresseur[2]}}
+        Type : {{ficheDresseur[3]}}
+        Promotion IMAC : {{ficheDresseur[4]}}
+        Pokémon totem : {{ficheDresseur[5]}}
         <a href="PokimacDresseur"><button class="btn">Retour</button></a>
     </div>
 
