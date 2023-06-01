@@ -111,6 +111,7 @@ def afficherDresseurIndividuel():
     affichage_fiche = mycursor.fetchall()
 
     affichage_fiche = list(affichage_fiche)
+    print(len(affichage_fiche))
     if (affichage_fiche[2] == None):
         affichage_fiche[2] = ""
     affichage_fiche[3] = requestSelect_From("types", "name", "id", affichage_fiche[3])
