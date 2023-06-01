@@ -21,6 +21,7 @@
             <tr>{% for pokimac in PokimacEquipe_aff %}
 
             {% for value in pokimac %}
+            <option value="{{value}}">{{value}}</option>
 
             <td>{% if loop.index == 1 %}
                 <a href="/supprimerPokimacEquipe?pokimac={{value}}">X</a>
