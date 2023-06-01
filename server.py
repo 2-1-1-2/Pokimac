@@ -196,7 +196,7 @@ def afficherEquipe():
 
 
 @ app.route("/ajouterPokimacEquipe", methods=['POST'])
-def ajouterDresseur():
+def ajouterEquipe():
     pokimac = request.json["pokimac"]
     mycursor = mydb.cursor()
     mycursor.execute("""INSERT INTO equipe_dresseurs (username) VALUES (%s)""", (pokimac["name"]))
@@ -207,13 +207,13 @@ def ajouterDresseur():
 
 
 @ app.route("/modifierPokimacEquipe")
-def modifierDresseur():
+def modifierEquipe():
 
     return redirect("/PokimacEquipe")
 
 
 @ app.route("/supprimerPokimacEquipe", methods=['GET'])
-def supprimerDresseur():
+def supprimerEquipe():
     pokimac = request.args.get('pokimac')
     mycursor = mydb.cursor()
     mycursor.execute("""DELETE FROM equipe_dresseurs WHERE id=%s""", [pokimac])
