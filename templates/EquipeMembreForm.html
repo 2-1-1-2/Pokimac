@@ -7,14 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokimac</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='app.js') }}" defer=""></script>
+    <script src="{{ url_for('static', filename='form.js') }}" defer=""></script>
 </head>
 
 <body>
-    <p>Ajouter pokimac</p>
-    <a href="PokimacDresseur">Voir pokimacdex (et profils)</a><br>
-    <a href="AjoutEquipe">Ajouter équipe</a>
-    <p>Voir équipe</p>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Nom</th>
+                <!-- <th>Team</th> -->
+                <th>Equipe</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="username" id="name" required></td>
+                <td><select name="type_id" id="id" required>
+                    </select>
+                </td>
+                <!-- <td>Team</td> -->
+            </tr>
+
+        </table>
+
+        <a href="AjoutEquipe"></a><button class="btn" id="add">Ajouter</button></a>
+        <a href="AjoutEquipe"><button class="btn">Retour</button></a>
+        <div id="res"></div>
+    </div>
+
+
+
 </body>
 
 </html>
