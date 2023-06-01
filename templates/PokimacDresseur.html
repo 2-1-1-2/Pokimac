@@ -27,12 +27,6 @@
             {% for value in pokimac %}
 <!-- tet-->
             <td>{% if loop.index == 1 %}
-                <a href="/PokimacDresseurFiche?pokimac={{value}}">Fiche</a>
-                {% else %}
-                {{value}}
-                {% endif %}
-            </td>
-            <td>{% if loop.index == 1 %}
                 <a href="/supprimerPokimacDresseur?pokimac={{value}}">X</a>
                 {% else %}
                 {{value}}
