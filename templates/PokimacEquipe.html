@@ -20,7 +20,6 @@
             </tr>
             <tr>{% for pokimac in PokimacEquipe_aff %}
 
-            {% for value in pokimac %}
 
             <td>{% if loop.index == 1 %}
                 <a href="/supprimerPokimacEquipe?pokimac={{value}}">X</a>
@@ -29,7 +28,6 @@
                 {% endif %}
 
             </td>
-            {% endfor %}
             </tr>
             {% endfor %}
         </table>
