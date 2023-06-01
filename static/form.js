@@ -55,7 +55,7 @@ document.getElementById("add").onclick = function create() {
 document.getElementById("addEquipe").onclick = function create() {
     console.log("ça marche");
     const nom = document.getElementById("nom").value;
-    const pokimacDresseur = { nom };
+    const pokimacEquipe = { nom };
 
     const response = fetch("/ajouterPokimacEquipe", {
         method: "POST",
