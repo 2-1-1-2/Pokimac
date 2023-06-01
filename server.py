@@ -110,7 +110,7 @@ def afficherDresseurIndividuel():
     mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [pokimac])
     affichage_fiche = mycursor.fetchall()
 
-    for elt in affiche_fiche[0]:
+    for elt in affichage_fiche[0]:
         print(elt)
 
     mycursor.close()
