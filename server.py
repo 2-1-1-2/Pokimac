@@ -191,10 +191,6 @@ def afficherEquipe():
     mycursor.close()
     return render_template("PokimacEquipe.html", PokimacEquipe_aff=affichage_equipe)
 
-@ app.route("/AjoutEquipe")
-def formEquipe():
-    return render_template("AjoutEquipe.html")
-
 @ app.route("/ajouterPokimacEquipe", methods=['POST'])
 def ajouterEquipe():
     pokimacE = request.json["pokimac"]
