@@ -110,7 +110,7 @@ def afficherDresseurIndividuel():
     mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [pokimac])
     affichage_fiche = mycursor.fetchall()
 
-    affichage_fiche = affichage_fiche[0]:
+    affichage_fiche = affichage_fiche[0]
 
     mycursor.close()
     return render_template("PokimacDresseurFiche.html", ficheDresseur = affichage_fiche)
