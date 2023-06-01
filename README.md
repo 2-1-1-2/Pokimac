@@ -50,7 +50,7 @@ Mode debug : `flask --app server.py --debug run`
 
 #### Affichage (Sara)
 
-- [ ] afficher individuellement pokimac
+- [x] afficher individuellement pokimac
 - [ ] affichage par équipe
 - [ ] Supprimer équipe
 
