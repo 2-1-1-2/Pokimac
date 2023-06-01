@@ -118,7 +118,7 @@ def afficherDresseurIndividuel():
     affichage_fiche[5] = requestSelect_From("pokemons", "name", "id", affichage_fiche[5])
 
     mycursor.close()
-    return render_template("PokimacDresseurFiche.html")
+    return render_template("PokimacDresseurFiche.html", ficheDresseur = affichage_fiche)
     
 
 @ app.route("/PokimacDresseurForm")
