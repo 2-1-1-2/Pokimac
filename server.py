@@ -108,13 +108,13 @@ def afficherDresseurIndividuel():
     pokimac = request.args.get('pokimac')
     mycursor = mydb.cursor()
     mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [pokimac])
-    affichage_dresseur = mycursor.fetchall()
+    affichage_fiche = mycursor.fetchall()
 
-    affichage_dresseur = list(affichage_dresseur)
-    if (affichage_dresseur[2] == None):
-        affichage_dresseur[2] = ""
-    affichage_dresseur[3] = requestSelect_From("types", "name", "id", affichage_dresseur[3])
-    affichage_dresseur[5] = requestSelect_From("pokemons", "name", "id", affichage_dresseur[5])
+    affichage_fiche = list(affichage_fiche)
+    if (affichage_fiche[2] == None):
+        affichage_fiche[2] = ""
+    affichage_fiche[3] = requestSelect_From("types", "name", "id", affichage_fiche[3])
+    affichage_fiche[5] = requestSelect_From("pokemons", "name", "id", affichage_fiche[5])
 
     mycursor.close()
     return render_template("PokimacDresseurFiche.html")
