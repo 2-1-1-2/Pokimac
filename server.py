@@ -111,9 +111,10 @@ def afficherDresseurIndividuel():
     affichage_fiche = mycursor.fetchall()
 
     affichage_fiche = affichage_fiche[0]
+    titres_fiche = ["ID :","Nom :","Team :","Type :","Promotion IMAC :","Pokémon totem :"]
 
     mycursor.close()
-    return render_template("PokimacDresseurFiche.html", ficheDresseur = affichage_fiche)
+    return render_template("PokimacDresseurFiche.html", ficheDresseur = affichage_fiche, ficheTitre = titres_fiche)
     
 
 @ app.route("/PokimacDresseurForm")
