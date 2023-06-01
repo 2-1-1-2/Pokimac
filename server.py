@@ -192,11 +192,11 @@ def afficherEquipe():
     return render_template("PokimacEquipe.html", PokimacEquipe_aff=affichage_equipe)
 
 
-@ app.route("/EquipeMembreForm", methods=['POST'])
+@ app.route("/AjoutEquipe", methods=['POST'])
 def ajouterEquipe():
     pokimac = request.json["pokimac"]
     mycursor = mydb.cursor()
-    mycursor.execute("""INSERT INTO equipe_dresseurs (username) VALUES (%s)""", (pokimac["name"]))
+    mycursor.execute("""INSERT INTO equipe_dresseurs (nom) VALUES (%s)""", (pokimac["name"]))
     mydb.commit()
     mycursor.close()
     print("Redirecting to /PokimacEquipe")
