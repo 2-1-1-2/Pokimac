@@ -14,23 +14,22 @@
     <div class="container">
         <table>
             <tr>
+                <th>ID</th>
                 <th>Nom</th>
-                <!-- <th>Team</th> -->
-                <th>Equipe</th>
+                <th>Team</th>
+                <th>Type</th>
+                <th>Promotion IMAC</th>
+                <th>Pokémon totem</th>
             </tr>
             <tr>
-                <td><input type="text" name="username" id="name" required></td>
-                <td><select name="type_id" id="id" required>
-                    </select>
+                {% for value in ficheDresseur %}
+                <td>{{value}}
                 </td>
-                <!-- <td>Team</td> -->
+            {% endfor %}
             </tr>
-
         </table>
 
-        <a href="AjoutEquipe"></a><button class="btn" id="add">Ajouter</button></a>
-        <a href="AjoutEquipe"><button class="btn">Retour</button></a>
-        <div id="res"></div>
+        <a href="PokimacDresseur"><button class="btn">Retour</button></a>
     </div>
 
 
