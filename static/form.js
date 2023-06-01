@@ -63,7 +63,7 @@ document.getElementById("addEquipe").onclick = function create() {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 'pokimac': pokimacEquipe }),
+        body: JSON.stringify({ 'pokimacE': pokimacEquipe }),
     });
 
     alert("enregistré !");

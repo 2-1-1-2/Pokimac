@@ -197,9 +197,9 @@ def formEquipe():
 
 @ app.route("/ajouterPokimacEquipe", methods=['POST'])
 def ajouterEquipe():
-    pokimac = request.json["pokimac"]
+    pokimacE = request.json["pokimacE"]
     mycursor = mydb.cursor()
-    mycursor.execute("""INSERT INTO equipe_dresseurs (nom) VALUES (%s)""", (pokimac["nom"]))
+    mycursor.execute("""INSERT INTO equipe_dresseurs (nom) VALUES (%s)""", (pokimacE["nom"]))
     mydb.commit()
     mycursor.close()
     print("Redirecting to /PokimacEquipe")
