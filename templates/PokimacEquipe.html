@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokimac</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='form.js') }}" defer=""></script>
+    <script src="{{url_for('static', filename='app.js')}}"></script>
+
 </head>
 
 <body>
@@ -16,20 +17,24 @@
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Team</th>
-                <th>Type</th>
-                <th>Promotion IMAC</th>
-                <th>Pokémon totem</th>
             </tr>
-            <tr>
-                <td>
-                {% for value in pokimac %}
-                </td>
+            {% for pokimac in PokimacEquipe_aff %}<tr></tr>
+
+            {% for value in pokimac %}
+
+            <td>{% if loop.index == 1 %}
+                <a href="/supprimerPokimacEquipe?pokimac={{value}}">X</a>
+                {% else %}
+                {{value}}
+                {% endif %}
+
+            </td>
             {% endfor %}
             </tr>
+            {% endfor %}
         </table>
 
-        <a href="PokimacDresseur"><button class="btn">Retour</button></a>
+        <a href="PokimacEquipeForm"><button class="btn">ajouter Pokimac équipe</button></a>
     </div>
 
 

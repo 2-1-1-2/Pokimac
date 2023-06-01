@@ -43,7 +43,7 @@ def initDB(filename, db):
     mycursor.close()
 
 
-if (mydb.is_connected()):  # Création de la DB et des tables si besoin
+if (mydb.is_connected()):  # CrÃ©ation de la DB et des tables si besoin
     print("Connected")
     with open('./static/init.sql', 'r') as sql_file:
         mycursor = mydb.cursor()
@@ -102,23 +102,23 @@ def afficherDresseur():
     mycursor.close()
     return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
 
-@ app.route("/PokimacDresseurFiche")
-def afficherDresseur():
-    affichage_dresseur = []
-    mycursor = mydb.cursor()
-    mycursor.execute(requestSelectAll("dresseurs"))
-    myresult = mycursor.fetchall()
 
-    for x in myresult:
-        x = list(x)
-        if (x[2] == None):
-            x[2] = ""
-        x[3] = requestSelect_From("types", "name", "id", x[3])
-        x[5] = requestSelect_From("pokemons", "name", "id", x[5])
-        affichage_dresseur.append(x)
+@ app.route("/PokimacDresseurFiche", methods=['GET'])
+def afficherDresseurIndividuel():
+    pokimac = request.args.get('pokimac')
+    mycursor = mydb.cursor()
+    mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [pokimac])
+    affichage_dresseur = mycursor.fetchall()
+
+    affichage_dresseur = list(affichage_dresseur)
+    if (affichage_dresseur[2] == None):
+        affichage_dresseur[2] = ""
+    affichage_dresseur[3] = requestSelect_From("types", "name", "id", affichage_dresseur[3])
+    affichage_dresseur[5] = requestSelect_From("pokemons", "name", "id", affichage_dresseur[5])
 
     mycursor.close()
-    return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+    return render_template("PokimacDresseurFiche.html")
+    
 
 @ app.route("/PokimacDresseurForm")
 def formDresseur():
@@ -177,6 +177,49 @@ def supprimerDresseur():
     mydb.commit()
     mycursor.close()
     return redirect("/PokimacDresseur")
+
+
+
+@ app.route("/PokimacEquipe")
+def afficherEquipe():
+    affichage_equipe = []
+    mycursor = mydb.cursor()
+    mycursor.execute(requestSelectAll("equipe_dresseurs"))
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        x = list(x)
+        affichage_equipe.append(x)
+
+    mycursor.close()
+    return render_template("PokimacEquipe.html", PokimacEquipe_aff=affichage_equipe)
+
+
+@ app.route("/ajouterPokimacEquipe", methods=['POST'])
+def ajouterDresseur():
+    pokimac = request.json["pokimac"]
+    mycursor = mydb.cursor()
+    mycursor.execute("""INSERT INTO equipe_dresseurs (username) VALUES (%s)""", (pokimac["name"]))
+    mydb.commit()
+    mycursor.close()
+    print("Redirecting to /PokimacEquipe")
+    return redirect('/PokimacEquipe') 
+
+
+@ app.route("/modifierPokimacEquipe")
+def modifierDresseur():
+
+    return redirect("/PokimacEquipe")
+
+
+@ app.route("/supprimerPokimacEquipe", methods=['GET'])
+def supprimerDresseur():
+    pokimac = request.args.get('pokimac')
+    mycursor = mydb.cursor()
+    mycursor.execute("""DELETE FROM equipe_dresseurs WHERE id=%s""", [pokimac])
+    mydb.commit()
+    mycursor.close()
+    return redirect("/PokimacEquipe")
 
 
 if __name__ == "__main__":

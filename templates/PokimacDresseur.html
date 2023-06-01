@@ -2,44 +2,50 @@
 <html>
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Pokimac</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<script src="{{url_for('static', filename='app.js')}}"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokimac</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{url_for('static', filename='app.js')}}"></script>
 
 </head>
 
 <body>
-	<div class="container">
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>Nom</th>
-				<th>Team</th>
-				<th>Type</th>
-				<th>Promotion IMAC</th>
-				<th>Pokémon totem</th>
-			</tr>
-			{% for pokimac in PokimacDresseur_aff %}<tr></tr>
+    <div class="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Team</th>
+                <th>Type</th>
+                <th>Promotion IMAC</th>
+                <th>Pokémon totem</th>
+            </tr>
+            {% for pokimac in PokimacDresseur_aff %}<tr></tr>
 
-			{% for value in pokimac %}
+            {% for value in pokimac %}
 <!-- tet-->
-			<td>{% if loop.index == 1 %}
-				<a href="/supprimerPokimacDresseur?pokimac={{value}}">X</a>
-				{% else %}
-				{{value}}
-				{% endif %}
+            <td>{% if loop.index == 1 %}
+                <a href="/PokimacDresseurFiche?pokimac={{value}}">Fiche</a>
+                {% else %}
+                {{value}}
+                {% endif %}
+            </td>
+            <td>{% if loop.index == 1 %}
+                <a href="/supprimerPokimacDresseur?pokimac={{value}}">X</a>
+                {% else %}
+                {{value}}
+                {% endif %}
 
-			</td>
-			{% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
+            </td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
 
-		<a href="PokimacDresseurForm"><button class="btn">ajouter Pokimac dresseur</button></a>
-	</div>
+        <a href="PokimacDresseurForm"><button class="btn">ajouter Pokimac dresseur</button></a>
+    </div>
 
 
 
