@@ -192,7 +192,7 @@ def afficherEquipe():
     return render_template("PokimacEquipe.html", PokimacEquipe_aff=affichage_equipe)
 
 @ app.route("/AjoutEquipe")
-def aformEquipe():
+def formEquipe():
     return render_template("AjoutEquipe.html")
 
 @ app.route("/ajouterPokimacEquipe", methods=['POST'])
