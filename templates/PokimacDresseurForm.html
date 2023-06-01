@@ -15,12 +15,14 @@
 		<table>
 			<tr>
 				<th>Nom</th>
-				<th>Team</th> -->
 				<th>Promotion IMAC</th>
+				<th>Team</th>
+				<th>Type</th>
 				<th>Pokémon totem</th>
 			</tr>
 			<tr>
 				<td><input type="text" name="username" id="username" required></td>
+				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025" required></td>
 				<td>
 					<select name="team" id="team">
 						<option value=""></option>
@@ -33,15 +35,14 @@
 				</td>
 				<td>
 					
-					<select name="pokemon_totem_id" id="pokemon_totem_id" required>
-					{% for pokemon in Pokemon_aff %}
-					{% for value in pokemon %}
+					<select name="type_id" id="type_id" required>
+					{% for type in Type_aff %}
+					{% for value in type %}
 					<option value="{{value}}">{{value}}</option>
 					{% endfor %}
 					{% endfor %}
 					</select>
 				</td>
-				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025" required></td>
 				<td><select name="pokemon_totem_id" id="pokemon_totem_id" required>
 
 						{% for pokemon in Pokemon_aff %}

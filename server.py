@@ -136,9 +136,11 @@ def formDresseur():
     for x in myresultType:
         affichage_type.append(x)
 
+    """
     myresulTeam = requestSelectColumn("equipe_dresseurs", "nom")
     for x in myresulTeam:
         affichage_team.append(x)
+        """
 
     myresultPokemon = requestSelectColumn(
         "pokemons", "name", "type_0", affichage_type[0][0], True)
