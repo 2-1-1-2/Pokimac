@@ -23,13 +23,7 @@
             </tr>
             <tr>
                 {% for value in ficheDresseur %}
-                <td>{% if loop.index == 1 %}
-                    <a href="/PokimacDresseurFiche?pokimac={{value}}">Fiche</a>
-                    <a href="/supprimerPokimacDresseur?pokimac={{value}}">X</a>
-                    {% else %}
-                    {{value}}
-                    {% endif %}
-    
+                <td>{{value}}
                 </td>
             {% endfor %}
             </tr>
