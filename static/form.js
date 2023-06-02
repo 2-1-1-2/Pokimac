@@ -4,14 +4,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-/*
-
-
-let input = document.getElementById("name");
-input.test;
-*/
-
-
 document.getElementById("type_id").addEventListener("click", choix_pokemon)
 
 
@@ -59,7 +51,7 @@ document.getElementById("add").onclick = function create() {
     const pokemon_totem_id = document.getElementById("pokemon_totem_id").value;
     const pokimacDresseur = { username, type_id, promotion_IMAC, pokemon_totem_id };
 
-    const response = fetch("/ajouterPokimacDresseur", {
+    const response = fetch("/PokimacDresseur", {
         method: "POST",
         headers: {
             Accept: "application/json",

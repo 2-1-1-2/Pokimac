@@ -3,6 +3,8 @@ import modules.dresseur as dresseur
 from flask import Flask, redirect, url_for, request, render_template, jsonify, abort
 from flask_cors import CORS
 import modules.db as db
+import modules.dresseur as pokiD
+import modules.equipe as pokiE
 app = Flask(__name__)
 CORS(app)
 
@@ -12,167 +14,76 @@ def index():
     return render_template("index.html")
 
 
-def toTeam(trainer, team):
-    mycursor = db.mydb.cursor()
-    mycursor.close()
+@ app.route("/PokimacDresseur", methods=['GET', 'POST'])
+def PokimacDresseur():
+    if request.method == 'GET':
+        affichage_dresseur = pokiD.afficherDresseur()
+        return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+    elif request.method == 'POST':
+        pokimac = request.json["pokimac"]
+        pokiD.ajouterDresseur(pokimac)
+        return redirect('/PokimacDresseur')
 
 
-@ app.route("/PokimacDresseur")
-def afficherDresseur():
-    affichage_dresseur = []
-    mycursor = db.mydb.cursor()
-    mycursor.execute(db.requestSelectAll("dresseurs"))
-    myresult = mycursor.fetchall()
+@ app.route("/PokimacDresseur/<int:id>",  methods=['PUT', 'DELETE', 'GET'])
+def PokimacDresseurModif(id):
+    if request.method == 'DELETE':
+        print("DELETE : " + str(id))
+        print("on supprime \n")
+        pokiD.supprimerDresseur(id)
 
-    for x in myresult:
-        x = list(x)
-        # x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
-        if (x[2] == None):
-            x[2] = ""
-        x[3] = db.requestSelect_From("types", "name", "id", x[3])
-        x[5] = db.requestSelect_From("pokemons", "name", "id", x[5])
-        affichage_dresseur.append(x)
+    elif request.method == 'PUT':
+        pokiD.modifierDresseur(id)
+    elif request.method == 'GET':
+        affichage_fiche, titres_fiche = pokiD.profilDresseur(id)
+        return render_template("PokimacDresseurFiche.html", ficheDresseur=affichage_fiche, ficheTitre=titres_fiche)
 
-    mycursor.close()
-    return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+# TODO : RECHARGER LA PAGE OU
+    return redirect("/PokimacDresseur")
 
 
 @ app.route("/PokimacDresseurForm", methods=['GET', 'POST'])
 def formDresseur():
-    affichage_pokemon = []
-    affichage_type = []
-    affichage_team = []
-
     if request.method == 'POST':
         type = request.json["type"]
-        print(type)
-        idType = db.requestSelect_From("types", "id", "name", type)
-        myresultPokemon = db.requestSelectColumn(
-            "pokemons", "name", "type_0", type, True)
-
-        for x in myresultPokemon:
-            print(x)
-            affichage_pokemon.append(x)
-
-        myresultType = db.requestSelectColumn("types", "name")
-        for x in myresultType:
-            affichage_type.append(x)
-        # data = {affichage_pokemon, affichage_type}
+        affichage_pokemon, affichage_type, affichage_team = pokiD.typeAdaptation(
+            type)
         return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type), 201
 
-    myresultType = db.requestSelectColumn("types", "name")
-    for x in myresultType:
-        affichage_type.append(x)
-
-    """
-    myresulTeam = db.requestSelectColumn("equipe_dresseurs", "nom")
-    for x in myresulTeam:
-        affichage_team.append(x)
-        """
-
-    myresultPokemon = db.requestSelectColumn(
-        "pokemons", "name", "type_0", affichage_type[0][0], True)
-    for x in myresultPokemon:
-        affichage_pokemon.append(x)
-    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
-
-
-@ app.route("/PokimacDresseurFiche", methods=['GET'])
-def afficherDresseurIndividuel():
-    pokimac = request.args.get('pokimac')
-    mycursor = db.mydb.cursor()
-    mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [pokimac])
-    affichage_fiche = mycursor.fetchall()
-
-    affichage_fiche = affichage_fiche[0]
-    titres_fiche = ["ID :", "Nom :", "Team :",
-                    "Type :", "Promotion IMAC :", "Pokémon totem :"]
-
-    mycursor.close()
-    return render_template("PokimacDresseurFiche.html", ficheDresseur=affichage_fiche, ficheTitre=titres_fiche)
-
-
-@ app.route("/ajouterPokimacDresseur", methods=['POST'])
-def ajouterDresseur():
-    pokimac = request.json["pokimac"]
-    mycursor = db.mydb.cursor()
-    pokimac["type_id"] = db.requestSelect_From(
-        "types", "id", "name", pokimac["type_id"])
-    pokimac["pokemon_totem_id"] = db.requestSelect_From(
-        "pokemons", "id", "name", pokimac["pokemon_totem_id"])
-    mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""",
-                     (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
-
-    db.mydb.commit()
-    mycursor.close()
-    toTeam(pokimac["username"], pokimac["team"])
-    print("Redirecting to /PokimacDresseur")
-    return redirect('/PokimacDresseur')
-
-
-@ app.route("/modifierPokimacDresseur")
-def modifierDresseur():
-
-    return redirect("/PokimacDresseur")
-
-
-@ app.route("/supprimerPokimacDresseur", methods=['GET'])
-def supprimerDresseur():
-    pokimac = request.args.get('pokimac')
-    mycursor = db.mydb.cursor()
-    mycursor.execute("""DELETE FROM dresseurs WHERE id=%s""", [pokimac])
-    db.mydb.commit()
-    mycursor.close()
-    return redirect("/PokimacDresseur")
+    elif request.method == 'GET':
+        affichage_pokemon, affichage_type, affichage_team = pokiD.affichageForm()
+        return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
 
 
 # equipe
 
 @ app.route("/PokimacEquipe")
 def afficherEquipe():
-    affichage_equipe = []
-    mycursor = db.mydb.cursor()
-    mycursor.execute(db.requestSelectAll("equipe_dresseurs"))
-    myresult = mycursor.fetchall()
 
-    for x in myresult:
-        x = list(x)
-        affichage_equipe.append(x)
-
-    mycursor.close()
+    affichage_equipe = pokiE.afficherEquipe()
     return render_template("PokimacEquipe.html", PokimacEquipe_aff=affichage_equipe)
 
 
-@ app.route("/AjoutEquipe")
+@ app.route("/Equipe", methods=['GET', 'POST'])
 def formEquipe():
-    return render_template("AjoutEquipe.html")
+    if request.method == 'GET':
+        return render_template("AjoutEquipe.html")
+
+    if request.method == 'POST':
+        pokiE.ajouterEquipe(request.json["pokimac"])
+        return redirect('/PokimacEquipe')
 
 
-@ app.route("/ajouterPokimacEquipe", methods=['POST'])
-def ajouterEquipe():
-    pokimac = request.json["pokimac"]
-    mycursor = db.mydb.cursor()
-    mycursor.execute(
-        """INSERT INTO equipe_dresseurs (nom) VALUES (%s)""", (pokimac["nom"],))
-    db.mydb.commit()
-    mycursor.close()
-    print("Redirecting to /PokimacEquipe")
-    return redirect('/PokimacEquipe')
+@ app.route("/Equipe/<int:id>",  methods=['PUT', 'DELETE'])
+def PokimacEquipeModif(id):
+    if request.method == 'DELETE':
+        print("DELETE : " + str(id))
+        print("on supprime \n")
+        pokiE.supprimerEquipe(id)
 
-
-@ app.route("/modifierPokimacEquipe")
-def modifierEquipe():
-
-    return redirect("/PokimacEquipe")
-
-
-@ app.route("/supprimerPokimacEquipe", methods=['GET'])
-def supprimerEquipe():
-    pokimac = request.args.get('pokimac')
-    mycursor = db.mydb.cursor()
-    mycursor.execute("""DELETE FROM equipe_dresseurs WHERE id=%s""", [pokimac])
-    db.mydb.commit()
-    mycursor.close()
+    elif request.method == 'PUT':
+        pokiD.modifierEquipe(id)
+# TODO : RECHARGER LA PAGE OU
     return redirect("/PokimacEquipe")
 
 

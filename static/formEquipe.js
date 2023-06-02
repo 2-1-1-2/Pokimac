@@ -7,7 +7,7 @@ document.getElementById("add").onclick = function create() {
     const nom = document.getElementById("nom").value;
     const pokimacEquipe = { nom };
 
-    const response = fetch("/ajouterPokimacEquipe", {
+    const response = fetch("/Equipe", {
         method: "POST",
         headers: {
             Accept: "application/json",

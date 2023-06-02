@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 import modules.db as db
-from flask import Flask, redirect, url_for, request, render_template, jsonify, abort
-from flask_cors import CORS
-app = Flask(__name__)
-CORS(app)
 
 
 def toTeam(trainer, team):
@@ -11,7 +7,6 @@ def toTeam(trainer, team):
     mycursor.close()
 
 
-@ app.route("/PokimacDresseur")
 def afficherDresseur():
     affichage_dresseur = []
     mycursor = db.mydb.cursor()
@@ -28,52 +23,10 @@ def afficherDresseur():
         affichage_dresseur.append(x)
 
     mycursor.close()
-    return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+    return affichage_dresseur
 
 
-@ app.route("/PokimacDresseurForm", methods=['GET', 'POST'])
-def formDresseur():
-    affichage_pokemon = []
-    affichage_type = []
-    affichage_team = []
-
-    if request.method == 'POST':
-        type = request.json["type"]
-        print(type)
-        idType = db.requestSelect_From("types", "id", "name", type)
-        myresultPokemon = db.requestSelectColumn(
-            "pokemons", "name", "type_0", type, True)
-
-        for x in myresultPokemon:
-            print(x)
-            affichage_pokemon.append(x)
-
-        myresultType = db.requestSelectColumn("types", "name")
-        for x in myresultType:
-            affichage_type.append(x)
-        # data = {affichage_pokemon, affichage_type}
-        return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type), 201
-
-    myresultType = db.requestSelectColumn("types", "name")
-    for x in myresultType:
-        affichage_type.append(x)
-
-    """
-    myresulTeam = db.requestSelectColumn("equipe_dresseurs", "nom")
-    for x in myresulTeam:
-        affichage_team.append(x)
-        """
-
-    myresultPokemon = db.requestSelectColumn(
-        "pokemons", "name", "type_0", affichage_type[0][0], True)
-    for x in myresultPokemon:
-        affichage_pokemon.append(x)
-    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
-
-
-@ app.route("/ajouterPokimacDresseur", methods=['POST'])
-def ajouterDresseur():
-    pokimac = request.json["pokimac"]
+def ajouterDresseur(pokimac):
     mycursor = db.mydb.cursor()
     pokimac["type_id"] = db.requestSelect_From(
         "types", "id", "name", pokimac["type_id"])
@@ -84,22 +37,72 @@ def ajouterDresseur():
 
     db.mydb.commit()
     mycursor.close()
-    toTeam(pokimac["username"], pokimac["team"])
+    # toTeam(pokimac["username"], pokimac["team"])
     print("Redirecting to /PokimacDresseur")
-    return redirect('/PokimacDresseur')
 
 
-@ app.route("/modifierPokimacDresseur")
-def modifierDresseur():
+def typeAdaptation(type):
+    affichage_pokemon = []
+    affichage_type = []
+    affichage_team = []
+    print(type)
+    # idType = db.requestSelect_From("types", "id", "name", type)
+    myresultPokemon = db.requestSelectColumn(
+        "pokemons", "name", "type_0", type, True)
 
-    return redirect("/PokimacDresseur")
+    for x in myresultPokemon:
+        print(x)
+        affichage_pokemon.append(x)
+
+    myresultType = db.requestSelectColumn("types", "name")
+    for x in myresultType:
+        affichage_type.append(x)
+
+    return affichage_pokemon, myresultType, affichage_team
+    # data = {affichage_pokemon, affichage_type}
 
 
-@ app.route("/supprimerPokimacDresseur", methods=['GET'])
-def supprimerDresseur():
-    pokimac = request.args.get('pokimac')
+def affichageForm():
+    affichage_pokemon = []
+    affichage_type = []
+    affichage_team = []
+    myresultType = db.requestSelectColumn("types", "name")
+    for x in myresultType:
+        affichage_type.append(x)
+
+        """
+        myresulTeam = db.requestSelectColumn("equipe_dresseurs", "nom")
+        for x in myresulTeam:
+            affichage_team.append(x)
+            """
+
+    myresultPokemon = db.requestSelectColumn(
+        "pokemons", "name", "type_0", affichage_type[0][0], True)
+    for x in myresultPokemon:
+        affichage_pokemon.append(x)
+    return affichage_pokemon, affichage_type, affichage_team
+
+
+def supprimerDresseur(id):
     mycursor = db.mydb.cursor()
-    mycursor.execute("""DELETE FROM dresseurs WHERE id=%s""", [pokimac])
+    mycursor.execute("""DELETE FROM dresseurs WHERE id=%s""", [id])
     db.mydb.commit()
     mycursor.close()
-    return redirect("/PokimacDresseur")
+
+
+def modifierDresseur(id):
+    print("cc on modifie")
+
+
+def profilDresseur(id):
+    mycursor = db.mydb.cursor()
+    print("GET ID profil" + str(id))
+    mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [id])
+    affichage_fiche = mycursor.fetchall()
+
+    affichage_fiche = affichage_fiche[0]
+    titres_fiche = ["ID :", "Nom :", "Team :",
+                    "Type :", "Promotion IMAC :", "Pokémon totem :"]
+
+    mycursor.close()
+    return affichage_fiche, titres_fiche

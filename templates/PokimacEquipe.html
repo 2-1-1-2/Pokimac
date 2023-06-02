@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokimac</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{url_for('static', filename='app.js')}}"></script>
+    <script src="{{url_for('static', filename='equipes.js')}}" defer=""></script>
 
 </head>
 
@@ -23,7 +23,8 @@
             {% for value in pokimac %}
 
             <td>{% if loop.index == 1 %}
-                <a href="/supprimerPokimacEquipe?pokimac={{value}}">X</a>
+                <button class="btn update" id="{{value}}">Modifier</button>
+                <button class="btn delete" id="{{value}}">Supprimer</button>
                 {% else %}
                     {{value}}
                 {% endif %}
