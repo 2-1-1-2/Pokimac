@@ -27,6 +27,7 @@
 			{% for value in pokimac %}
 
 			<td>{% if loop.index == 1 %}
+				<a href="/PokimacDresseurFiche?pokimac={{value}}">Fiche</a>
 				<a href="/supprimerPokimacDresseur?pokimac={{value}}">X</a>
 				{% else %}
 				{{value}}

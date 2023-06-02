@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokimac</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='formEquipe.js') }}" defer=""></script>
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Nom d'équipe</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="nom" id="nom" required></td>
+            </tr>
+
+        </table>
+
+        <a href="PokimacEquipe"><button class="btn" id="add">Ajouter</button></a>
+        <a href="PokimacEquipe"><button class="btn">Retour</button></a>
+        <div id="res"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokimac</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='form.js') }}" defer=""></script>
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Team</th>
+                <th>Type</th>
+                <th>Promotion IMAC</th>
+                <th>Pokémon totem</th>
+            </tr>
+            <tr>
+                {% for value in ficheDresseur %}
+                <td>{{value}}
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
+
+        <a href="PokimacDresseur"><button class="btn">Retour</button></a>
+    </div>
+
+
+
+</body>
+
+</html>
