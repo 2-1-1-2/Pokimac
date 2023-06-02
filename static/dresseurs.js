@@ -4,9 +4,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-
-
-
 const buttons = document.getElementsByTagName("button");
 
 const buttonPressed = e => {
