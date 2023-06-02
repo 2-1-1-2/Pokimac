@@ -35,8 +35,8 @@
 				{% for value in pokimac %}
 
 				<td>{% if loop.index == 1 %}
-					<a href="/PokimacDresseur/{{value}}">Fiche</a><br>
-					<button class="btn update" id="{{value}}">Modifier</button> <br>
+					<br>
+					<a href="/PokimacDresseur/{{value}}"><button class="btn update">Fiche</button></a><br>
 					<a href="PokimacDresseur"><button class="btn delete" id="{{value}}">Supprimer</button></a>
 					{% else %}
 					{{value}}

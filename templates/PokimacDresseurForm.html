@@ -34,13 +34,13 @@
 					</select>
 				</td>
 				<td>
-					
+
 					<select name="type_id" id="type_id" required>
-					{% for type in Type_aff %}
-					{% for value in type %}
-					<option value="{{value}}">{{value}}</option>
-					{% endfor %}
-					{% endfor %}
+						{% for type in Type_aff %}
+						{% for value in type %}
+						<option value="{{value}}">{{value}}</option>
+						{% endfor %}
+						{% endfor %}
 					</select>
 				</td>
 				<td><select name="pokemon_totem_id" id="pokemon_totem_id" required>
@@ -57,7 +57,6 @@
 		</table>
 
 		<a href="PokimacDresseur"></a><button class="btn" id="add">Ajouter</button></a>
-		<a href="PokimacDresseur"></a><button class="btn" id="modify">Modifier</button></a>
 		<a href="PokimacDresseur"><button class="btn">Retour</button></a>
 		<div id="res"></div>
 	</div>

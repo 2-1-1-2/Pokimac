@@ -20,17 +20,16 @@
             </tr>
             <tr>{% for pokimac in PokimacEquipe_aff %}
 
-            {% for value in pokimac %}
+                {% for value in pokimac %}
 
-            <td>{% if loop.index == 1 %}
-                <button class="btn update" id="{{value}}">Modifier</button>
-                <a href="PokimacEquipe"><button class="btn delete" id="{{value}}">Supprimer</button></a>
-                {% else %}
+                <td>{% if loop.index == 1 %}
+                    <a href="PokimacEquipe"><button class="btn delete" id="{{value}}">Supprimer</button></a>
+                    {% else %}
                     {{value}}
-                {% endif %}
+                    {% endif %}
 
-            </td>
-            {% endfor %}
+                </td>
+                {% endfor %}
             </tr>
             {% endfor %}
         </table>

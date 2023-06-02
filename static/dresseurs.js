@@ -27,7 +27,7 @@ async function trie() {
 function changeData(data) {
     //console.log(data)
     let liste_dresseurs = document.getElementById("listeDresseurs")
-    
+
     // console.log(data["PokimacDresseur_aff"][0])
     liste_dresseurs.innerHTML = "";
     let test = ""
@@ -35,12 +35,11 @@ function changeData(data) {
 
     data["PokimacDresseur_aff"].forEach(element => {
         test += "<tr>"
-        i=0;
+        i = 0;
         element.forEach(value => {
             test += "<td>"
-            if(i==0){
-                test +=`<a href='/PokimacDresseur/${value}'>Fiche</a>`
-                test += `<button class='btn update' id='${value}'>Modifier</button>`
+            if (i == 0) {
+                test += `<a href='/PokimacDresseur/${value}'>Fiche</a><br>`
                 test += `<button class='btn delete' id='${value}'>Supprimer</button>`
             } else {
                 test += `${value}`

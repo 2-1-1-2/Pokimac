@@ -1,55 +1,151 @@
-* {
-	margin: 0;
-	padding: 0;
-}
+ * {
+ 	margin: 0;
+ 	padding: 0;
+ }
 
-body {
-	font-family: sans-serif;
-}
+ body {
+ 	font-family: 'Trebuchet MS', sans-serif;
+ 	width: 90%;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ }
 
-.form-input {
-	margin-top: 18px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
+ .form-input {
+ 	margin-top: 18px;
+ 	display: flex;
+ 	flex-direction: column;
+ 	gap: 8px;
+ }
 
-input[type='number'] {
-	padding: 6px 12px;
-	font: inherit;
-	border-radius: 0;
-	border: 1px solid black;
-}
+ input[type='number'] {
+ 	padding: 6px 12px;
+ 	font: inherit;
+ 	border-radius: 0;
+ 	border: 1px solid black;
+ }
 
-table,
-td,
-th {
-	border: 1px solid;
-}
+ table,
+ td,
+ th {
+ 	border: 2px solid;
+ }
 
-td,
-th {
-	text-align: left;
-	padding: 6px 12px;
-}
+ th {
+ 	background-color: #ed3737;
+ 	color: white;
+ 	border-color: black;
+ }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
+ td,
+ th {
+ 	text-align: left;
+ 	padding: 6px 12px;
+ }
 
-.container {
-	max-width: 60vh;
-	max-height: 70vh;
-	margin: auto;
-	padding-top: 5vh;
-}
+ table {
+ 	width: 90%;
+ 	border: 1rem;
+ 	border-collapse: collapse;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	margin-top: 2rem;
+ 	margin-bottom: 2rem;
+ }
 
-.btn {
-	margin: 0.5vh;
-	padding: 0.5em;
-	position: relative;
-	left: 50%;
-	-ms-transform: translateX(-50%);
-	transform: translateX(-50%);
-}
+ .container {
+ 	max-width: 60vh;
+ 	max-height: 70vh;
+ 	margin: auto;
+ 	padding-top: 5vh;
+ }
+
+ .btn {
+ 	margin: 0.5vh;
+ 	padding: 0.5em;
+ 	border-radius: 3px;
+ 	border: 0rem;
+ 	position: relative;
+ 	left: 50%;
+ 	cursor: pointer;
+ 	-ms-transform: translateX(-50%);
+ 	transform: translateX(-50%);
+ }
+
+ .btn.delete {
+ 	background-color: #eb5757;
+ 	color: white;
+ }
+
+ .btn.delete:hover {
+ 	background-color: #ed3737;
+ }
+
+ .btn.update {
+ 	background-color: #68c075;
+ 	color: white;
+ }
+
+ .btn.update:hover {
+ 	background-color: #42ae52;
+ }
+
+ .menu {
+ 	margin: 1rem;
+ }
+
+ @font-face {
+ 	font-family: 'Heavitas';
+ 	/* nom que l’on donne à la police . */
+ 	/* chemin d’accès à la police. */
+ 	/*En cas de sources multiples, les séparer par des virgules. */
+ 	/* Elles seront classées par priorité. */
+ 	src: url('Heavitas.ttf') format('ttf');
+ 	font-weight: normal;
+ 	/* le poids (bold, 400, 700, 900 ...) */
+ 	font-style: normal;
+ 	/* italique ou normal */
+ }
+
+ body {
+ 	padding: 0;
+ 	margin: 0;
+ }
+
+ .title,
+ .bord a {
+ 	font-family: Heavitas;
+ 	text-align: center;
+ 	color: #FF5722;
+ 	text-transform: uppercase;
+ 	text-decoration: none;
+ 	font-weight: bold;
+ }
+
+ .title2 {
+ 	font-family: Heavitas;
+ 	text-align: center;
+ 	color: #FF9800;
+
+ }
+
+
+ .bord {
+ 	margin-top: 5vh;
+ 	display: block;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	height: 100%;
+ 	max-width: 720px;
+ 	border: thick solid #FF5722;
+ }
+
+ .texte {
+
+ 	border-bottom: thick solid #FF5722;
+ }
+
+
+ .bord p {
+ 	text-align: center;
+ 	padding: 1rem;
+ }

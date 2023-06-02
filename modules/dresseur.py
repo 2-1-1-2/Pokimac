@@ -18,12 +18,13 @@ def afficherDresseur(order):
         mycursor.execute(db.requestSelectAll("dresseurs"))
     
     myresult = mycursor.fetchall()
-
     for x in myresult:
         x = list(x)
         # x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
         if (x[2] == None):
             x[2] = ""
+        else :
+            x[2] = db.requestSelect_From("equipe_dresseurs", "nom", "id", x[2])
         x[3] = db.requestSelect_From("types", "name", "id", x[3])
         x[5] = db.requestSelect_From("pokemons", "name", "id", x[5])
         affichage_dresseur.append(x)
@@ -36,10 +37,12 @@ def ajouterDresseur(pokimac):
     mycursor = db.mydb.cursor()
     pokimac["type_id"] = db.requestSelect_From(
         "types", "id", "name", pokimac["type_id"])
+    pokimac["team"] = db.requestSelect_From(
+        "equipe_dresseurs", "id", "nom", pokimac["team"])
     pokimac["pokemon_totem_id"] = db.requestSelect_From(
         "pokemons", "id", "name", pokimac["pokemon_totem_id"])
-    mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""",
-                     (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
+    mycursor.execute("""INSERT INTO dresseurs (username, type_id,team_dresseur_id ,promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s, %s, %s, %s)""",
+                     (pokimac["username"], pokimac["type_id"],pokimac["team"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
 
     db.mydb.commit()
     mycursor.close()
@@ -115,9 +118,18 @@ def profilDresseur(id):
     mycursor = db.mydb.cursor()
     print("GET ID profil" + str(id))
     mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [id])
-    affichage_fiche = mycursor.fetchall()
+    affichage_fiche = list(mycursor.fetchall())
 
-    affichage_fiche = affichage_fiche[0]
+    affichage_fiche = list(affichage_fiche[0])
+    print(affichage_fiche[2])
+    
+    if (affichage_fiche[2] == None):
+            affichage_fiche[2] = ""
+    else :
+        affichage_fiche[2] = db.requestSelect_From("equipe_dresseurs", "nom", "id", affichage_fiche[2])
+    affichage_fiche[3] = db.requestSelect_From("types", "name", "id", affichage_fiche[3])
+    affichage_fiche[5] = db.requestSelect_From("pokemons", "name", "id", affichage_fiche[5])
+    
     titres_fiche = ["ID :", "Nom :", "Team :",
                     "Type :", "Promotion IMAC :", "Pokémon totem :"]
 
