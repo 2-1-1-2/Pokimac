@@ -43,6 +43,7 @@ Mode debug : `flask --app server.py --debug run`
 
 - [x] pokémon choisi correspond au type sélectionné
 - [ ] Pouvoir ajouter les team dès l'inscription (toTeam())
+- [ ] Redirection correcte
 
 #### Pokimacdex (Marion)
 
@@ -53,13 +54,13 @@ Mode debug : `flask --app server.py --debug run`
 
 #### Affichage (Sara)
 
-- [ ] afficher individuellement pokimac
+- [x] afficher individuellement pokimac
 - [ ] affichage par équipe
-- [ ] Supprimer équipe
+- [x] Supprimer équipe
 
 #### Equipe (Nolwenn)
 
-- [ ] Création équipe
+- [x] Création équipe
 - [ ] Modification équipe
 - [ ] Quitter équipe
 
