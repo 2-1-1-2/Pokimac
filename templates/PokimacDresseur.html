@@ -13,13 +13,15 @@
 
 <body>
 	<div class="container">
+
 		<label for="orderBy">Trier par: </label>
 		<select id="orderBy">
 			<option value="None" selected></option>
 			<option value="username">ordre alphabétique</option>
 			<option value="type_id">type</option>
 		</select>
-		<table>
+
+		<table id="listeDresseurs">
 			<tr>
 				<th>ID</th>
 				<th>Nom</th>
@@ -28,8 +30,8 @@
 				<th>Promotion IMAC</th>
 				<th>Pokémon totem</th>
 			</tr>
-			{% for pokimac in PokimacDresseur_aff %}<tr>
-
+			{% for pokimac in PokimacDresseur_aff %}
+			<tr>
 				{% for value in pokimac %}
 
 				<td>{% if loop.index == 1 %}

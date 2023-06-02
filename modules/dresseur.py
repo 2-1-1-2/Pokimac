@@ -67,6 +67,7 @@ def typeAdaptation(type):
 
 
 def affichageForm():
+    print("affichage form")
     affichage_pokemon = []
     affichage_type = []
     affichage_team = []
@@ -93,8 +94,21 @@ def supprimerDresseur(id):
     mycursor.close()
 
 
-def modifierDresseur(id):
-    print("cc on modifie")
+def modifierDresseur(id,pokimac):
+    mycursor = db.mydb.cursor()
+    pokimac["type_id"] = db.requestSelect_From(
+        "types", "id", "name", pokimac["type_id"])
+    pokimac["pokemon_totem_id"] = db.requestSelect_From(
+        "pokemons", "id", "name", pokimac["pokemon_totem_id"])
+    # mycursor.execute("""INSERT INTO dresseurs (username, type_id, promotion_IMAC, pokemon_totem_id ) VALUES (%s, %s,  %s, %s)""",
+    #                  (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"]))
+    mycursor.execute("""UPDATE dresseurs SET username=%s, type_id=%s, promotion_IMAC=%s, pokemon_totem_id=%s  WHERE id=%s""",
+                     (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"], id))
+
+    db.mydb.commit()
+    mycursor.close()
+    # toTeam(pokimac["username"], pokimac["team"])
+    print("Redirecting to /PokimacDresseur")
 
 
 def profilDresseur(id):
@@ -109,3 +123,14 @@ def profilDresseur(id):
 
     mycursor.close()
     return affichage_fiche, titres_fiche
+
+def recupDresseur(id):
+    mycursor = db.mydb.cursor()
+    print("recup" + str(id))
+    mycursor.execute("""SELECT * FROM dresseurs WHERE id=%s""", [id])
+    affichage_dresseur = mycursor.fetchall();
+    affichage_dresseur = affichage_dresseur[0]
+
+    mycursor.close()
+    return affichage_dresseur
+

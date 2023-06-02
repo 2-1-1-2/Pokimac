@@ -15,14 +15,20 @@ def index():
 
 
 @ app.route("/PokimacDresseur", methods=['GET', 'POST','PUT'])
+@ app.route("/PokimacDresseur", methods=['GET', 'POST','PUT'])
 def PokimacDresseur():
     if request.method == 'GET':
+        affichage_dresseur = pokiD.afficherDresseur(None)
         affichage_dresseur = pokiD.afficherDresseur(None)
         return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
     elif request.method == 'POST':
         pokimac = request.json["pokimac"]
         pokiD.ajouterDresseur(pokimac)
         return redirect('/PokimacDresseur')
+    elif request.method == 'PUT':
+        column_tri = request.json['column_tri']
+        affichage_dresseur = pokiD.afficherDresseur(column_tri)
+        return jsonify(PokimacDresseur_aff=affichage_dresseur), 201
     elif request.method == 'PUT':
         column_tri = request.json['column_tri']
         affichage_dresseur = pokiD.afficherDresseur(column_tri)
@@ -37,7 +43,11 @@ def PokimacDresseurModif(id):
         pokiD.supprimerDresseur(id)
 
     elif request.method == 'PUT':
-        pokiD.modifierDresseur(id)
+        return redirect('/PokimacDresseurForm/'+id)
+        # pokimac=request.json['pokimac']
+        # pokiD.modifierDresseur(id, pokimac)
+        # return redirect('/PokimacDresseur')
+
     elif request.method == 'GET':
         affichage_fiche, titres_fiche = pokiD.profilDresseur(id)
         return render_template("PokimacDresseurFiche.html", ficheDresseur=affichage_fiche, ficheTitre=titres_fiche)
@@ -45,7 +55,7 @@ def PokimacDresseurModif(id):
     return redirect("/PokimacDresseur")
 
 
-@ app.route("/PokimacDresseurForm", methods=['GET', 'POST'])
+@ app.route("/PokimacDresseurForm", methods=['GET', 'POST','PUT'])
 def formDresseur():
     if request.method == 'POST':
         type = request.json["type"]
@@ -54,8 +64,28 @@ def formDresseur():
         return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type), 201
 
     elif request.method == 'GET':
+        affichage_dresseur = []
+        print("ici")
         affichage_pokemon, affichage_type, affichage_team = pokiD.affichageForm()
-        return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type, Team_aff=affichage_team)
+        return render_template("PokimacDresseurForm.html", Dresseur_aff=affichage_dresseur, Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
+    
+    elif request.method == 'PUT':
+        affichage_dresseur = []
+        affichage_pokemon, affichage_type, affichage_team = pokiD.affichageForm()
+        print("!!!")
+        return render_template("PokimacDresseurForm.html", Dresseur_aff=affichage_dresseur, Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
+
+
+@ app.route("/PokimacDresseurForm/<int:id>", methods=['GET'])
+def formDresseurModif(id):
+    if request.method == 'GET':
+        print("ca marche 3")
+        affichage_dresseur = pokiD.recupDresseur(id)
+        affichage_pokemon, affichage_type, affichage_team = pokiD.affichageForm()
+        print("??")
+        # la ligne suivante ne semble pas marcher 
+        return render_template("PokimacDresseurForm.html", Dresseur_aff=affichage_dresseur, Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
+    # return redirect("/PokimacDresseurForm")
 
 
 # equipe
