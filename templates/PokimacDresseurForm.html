@@ -21,8 +21,9 @@
 				<th>Pokémon totem</th>
 			</tr>
 			<tr>
-				<td><input type="text" name="username" id="username" required></td>
-				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025" required></td>
+				<label for="" value="{{Dresseur_aff[0]}}" id="dresseur_id"></label>
+				<td><input type="text" name="username" id="username" value="{{Dresseur_aff['username']}}"required></td>
+				<td><input type="number" name="promotion_IMAC" id="promotion_IMAC" min="2009" max="2025 value="{{Dresseur_aff[1]}}" required></td>
 				<td>
 					<select name="team" id="team">
 						<option value=""></option>
@@ -57,6 +58,7 @@
 		</table>
 
 		<a href="PokimacDresseur"></a><button class="btn" id="add">Ajouter</button></a>
+		<a href="PokimacDresseur"></a><button class="btn" id="modify">Modifier</button></a>
 		<a href="PokimacDresseur"><button class="btn">Retour</button></a>
 		<div id="res"></div>
 	</div>

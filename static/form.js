@@ -72,3 +72,26 @@ document.getElementById("add").onclick = function create() {
 
 }
 
+
+document.getElementById("modify").onclick = function create() {
+    console.log("ça marche 2");
+    const username = document.getElementById("username").value;
+    const type_id = document.getElementById("type_id").value;
+    const promotion_IMAC = document.getElementById("promotion_IMAC").value;
+    const pokemon_totem_id = document.getElementById("pokemon_totem_id").value;
+    const id_dresseur = document.getElementById("dresseur_id").value;
+    const pokimacDresseur = {id_dresseur, username, type_id, promotion_IMAC, pokemon_totem_id };
+
+    const response = fetch("/modifierPokimacDresseur", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 'pokimac': pokimacDresseur }),
+    });
+
+    alert("modifié !");
+
+}
+

@@ -29,6 +29,9 @@ def requestInsert(table, head):
 def requestSelectAll(table):
     return f"SELECT * FROM {table}; "
 
+def requestSelectAllOrder(table, column):
+    return f"SELECT * FROM {table} ORDER BY {column} ASC; "
+
 
 def initDB(filename, db):
     file = open(filename, mode='r', encoding='utf-8-sig')
@@ -109,10 +112,11 @@ def afficherDresseur():
     return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
 
 
-@ app.route("/PokimacDresseurForm", methods=['GET', 'POST'])
+@ app.route("/PokimacDresseurForm", methods=['GET', 'POST','PUT'])
 def formDresseur():
     affichage_pokemon = []
     affichage_type = []
+    affichage_dresseur = []
     affichage_team = []
 
     if request.method == 'POST':
@@ -130,8 +134,9 @@ def formDresseur():
         for x in myresultType:
             affichage_type.append(x)
         # data = {affichage_pokemon, affichage_type}
-        return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type), 201
+        return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type,  Dresseur_aff=affichage_dresseur), 201
 
+    
     myresultType = requestSelectColumn("types", "name")
     for x in myresultType:
         affichage_type.append(x)
@@ -146,7 +151,20 @@ def formDresseur():
         "pokemons", "name", "type_0", affichage_type[0][0], True)
     for x in myresultPokemon:
         affichage_pokemon.append(x)
-    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
+
+
+    if request.method == 'PUT':
+        id = request.json["id_dresseur"]
+        print(id)
+        affichage_dresseur = requestSelect_From("dresseurs", "*", "id", id)
+        
+        # for x in myresultPokemon:
+        #     print(x)
+        #     affichage_pokemon.append(x)
+
+        return jsonify(Pokemon_aff=affichage_pokemon, Type_aff=affichage_type, Dresseur_aff=affichage_dresseur), 201
+
+    return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type, Dresseur_aff=affichage_dresseur)
 
 
 @ app.route("/ajouterPokimacDresseur", methods=['POST'])
@@ -167,9 +185,21 @@ def ajouterDresseur():
     return redirect('/PokimacDresseur')
 
 
-@ app.route("/modifierPokimacDresseur")
+@ app.route("/modifierPokimacDresseur", methods=['POST'])
 def modifierDresseur():
+    pokimac = request.json["pokimac"]
+    mycursor = mydb.cursor()
+    pokimac["type_id"] = requestSelect_From(
+        "types", "id", "name", pokimac["type_id"])
+    pokimac["pokemon_totem_id"] = requestSelect_From(
+        "pokemons", "id", "name", pokimac["pokemon_totem_id"])
+    mycursor.execute("""UPDATE dresseurs SET username=%s, type_id=%s, promotion_IMAC=%s, pokemon_totem_id=%s WHERE id=%s""",
+                    (pokimac["username"], pokimac["type_id"], pokimac["promotion_IMAC"], pokimac["pokemon_totem_id"], pokimac["id_dresseur"]))
 
+    mydb.commit()
+    mycursor.close()
+    toTeam(pokimac["username"], pokimac["team"])
+    print("Redirecting to /PokimacDresseur")
     return redirect("/PokimacDresseur")
 
 
