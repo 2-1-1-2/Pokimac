@@ -7,10 +7,16 @@ def toTeam(trainer, team):
     mycursor.close()
 
 
-def afficherDresseur():
+
+def afficherDresseur(order):
+    print("afficher dresseur")
     affichage_dresseur = []
     mycursor = db.mydb.cursor()
-    mycursor.execute(db.requestSelectAll("dresseurs"))
+    if(order!=None):
+        mycursor.execute(db.requestSelectAllOrder("dresseurs",order))
+    else:
+        mycursor.execute(db.requestSelectAll("dresseurs"))
+    
     myresult = mycursor.fetchall()
 
     for x in myresult:

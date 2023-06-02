@@ -20,6 +20,9 @@ def requestInsert(table, head):
 def requestSelectAll(table):
     return f"SELECT * FROM {table}; "
 
+def requestSelectAllOrder(table, column):
+    return f"SELECT * FROM {table} ORDER BY {column} ASC; "
+
 
 def initDB(filename, db):
     file = open(filename, mode='r', encoding='utf-8-sig')

@@ -13,6 +13,12 @@
 
 <body>
 	<div class="container">
+		<label for="orderBy">Trier par: </label>
+		<select id="orderBy">
+			<option value="None" selected></option>
+			<option value="username">ordre alphabétique</option>
+			<option value="type_id">type</option>
+		</select>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -24,18 +30,18 @@
 			</tr>
 			{% for pokimac in PokimacDresseur_aff %}<tr>
 
-			{% for value in pokimac %}
+				{% for value in pokimac %}
 
-			<td>{% if loop.index == 1 %}
-				<a href="/PokimacDresseur/{{value}}">Fiche</a>
-				<button class="btn update" id="{{value}}">Modifier</button>
-				<a href="PokimacDresseur"><button class="btn delete" id="{{value}}">Supprimer</button></a>
-				{% else %}
-				{{value}}
-				{% endif %}
+				<td>{% if loop.index == 1 %}
+					<a href="/PokimacDresseur/{{value}}">Fiche</a><br>
+					<button class="btn update" id="{{value}}">Modifier</button> <br>
+					<a href="PokimacDresseur"><button class="btn delete" id="{{value}}">Supprimer</button></a>
+					{% else %}
+					{{value}}
+					{% endif %}
 
-			</td>
-			{% endfor %}
+				</td>
+				{% endfor %}
 			</tr>
 			{% endfor %}
 		</table>

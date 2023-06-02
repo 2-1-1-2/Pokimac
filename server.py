@@ -14,15 +14,19 @@ def index():
     return render_template("index.html")
 
 
-@ app.route("/PokimacDresseur", methods=['GET', 'POST'])
+@ app.route("/PokimacDresseur", methods=['GET', 'POST','PUT'])
 def PokimacDresseur():
     if request.method == 'GET':
-        affichage_dresseur = pokiD.afficherDresseur()
+        affichage_dresseur = pokiD.afficherDresseur(None)
         return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
     elif request.method == 'POST':
         pokimac = request.json["pokimac"]
         pokiD.ajouterDresseur(pokimac)
         return redirect('/PokimacDresseur')
+    elif request.method == 'PUT':
+        column_tri = request.json['column_tri']
+        affichage_dresseur = pokiD.afficherDresseur(column_tri)
+        return jsonify(PokimacDresseur_aff=affichage_dresseur), 201
 
 
 @ app.route("/PokimacDresseur/<int:id>",  methods=['PUT', 'DELETE', 'GET'])

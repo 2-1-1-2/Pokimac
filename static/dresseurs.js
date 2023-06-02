@@ -28,3 +28,23 @@ async function update_(id) {
 }
 
 
+
+document.getElementById("orderBy").addEventListener("change", trie)
+
+async function trie() {
+    const column = document.getElementById("orderBy").value;
+    console.log("on trie par " + column);
+    const response = await fetch("/PokimacDresseur", {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 'column_tri': column }),
+    });
+
+    const data = await response.json();
+
+    changeData(data)
+
+}
