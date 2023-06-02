@@ -36,7 +36,7 @@
 
 				<td>{% if loop.index == 1 %}
 					<a href="/PokimacDresseur/{{value}}">Fiche</a>
-					<button class="btn update" id="{{value}}">Modifier</button>
+					<a href="/PokimacDresseurForm/{{value}}"><button class="btn update" id="{{value}}">Modifier</button></a>
 					<button class="btn delete" id="{{value}}">Supprimer</button>
 					{% else %}
 					{{value}}
