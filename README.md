@@ -42,8 +42,8 @@ Mode debug : `flask --app server.py --debug run`
 #### Pokimac dresseurs (Tanya) - Amélioration :
 
 - [x] pokémon choisi correspond au type sélectionné
-- [ ] Pouvoir ajouter les team dès l'inscription (toTeam())
-- [ ] Redirection correcte
+- [x] Pouvoir ajouter les team dès l'inscription (toTeam())
+- [x] Redirection correcte
 
 #### Pokimacdex (Marion)
 

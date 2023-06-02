@@ -1,6 +1,6 @@
 //Au chargement on affiche la liste des absences
 document.addEventListener("DOMContentLoaded", async function () {
-    const response = await fetch("/PokimacDresseur");
+    const response = await fetch("/PokimacEquipe");
 });
 
 

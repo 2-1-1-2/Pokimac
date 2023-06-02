@@ -38,7 +38,6 @@ def PokimacDresseurModif(id):
         affichage_fiche, titres_fiche = pokiD.profilDresseur(id)
         return render_template("PokimacDresseurFiche.html", ficheDresseur=affichage_fiche, ficheTitre=titres_fiche)
 
-# TODO : RECHARGER LA PAGE OU
     return redirect("/PokimacDresseur")
 
 
@@ -52,7 +51,7 @@ def formDresseur():
 
     elif request.method == 'GET':
         affichage_pokemon, affichage_type, affichage_team = pokiD.affichageForm()
-        return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type)
+        return render_template("PokimacDresseurForm.html", Pokemon_aff=affichage_pokemon, Type_aff=affichage_type, Team_aff=affichage_team)
 
 
 # equipe
@@ -83,7 +82,6 @@ def PokimacEquipeModif(id):
 
     elif request.method == 'PUT':
         pokiD.modifierEquipe(id)
-# TODO : RECHARGER LA PAGE OU
     return redirect("/PokimacEquipe")
 
 

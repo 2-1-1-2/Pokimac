@@ -45,13 +45,11 @@ def typeAdaptation(type):
     affichage_pokemon = []
     affichage_type = []
     affichage_team = []
-    print(type)
     # idType = db.requestSelect_From("types", "id", "name", type)
     myresultPokemon = db.requestSelectColumn(
         "pokemons", "name", "type_0", type, True)
 
     for x in myresultPokemon:
-        print(x)
         affichage_pokemon.append(x)
 
     myresultType = db.requestSelectColumn("types", "name")
@@ -70,11 +68,10 @@ def affichageForm():
     for x in myresultType:
         affichage_type.append(x)
 
-        """
-        myresulTeam = db.requestSelectColumn("equipe_dresseurs", "nom")
-        for x in myresulTeam:
-            affichage_team.append(x)
-            """
+    myresulTeam = db.requestSelectColumn("equipe_dresseurs", "nom")
+    for x in myresulTeam:
+        affichage_team.append(x)
+    print(affichage_team)
 
     myresultPokemon = db.requestSelectColumn(
         "pokemons", "name", "type_0", affichage_type[0][0], True)

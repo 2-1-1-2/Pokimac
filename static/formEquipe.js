@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function () {
-    const response = await fetch("/AjoutEquipe");
+    const response = await fetch("/Equipe");
 });
 
 document.getElementById("add").onclick = function create() {

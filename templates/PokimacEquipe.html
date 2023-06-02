@@ -24,7 +24,7 @@
 
             <td>{% if loop.index == 1 %}
                 <button class="btn update" id="{{value}}">Modifier</button>
-                <button class="btn delete" id="{{value}}">Supprimer</button>
+                <a href="PokimacEquipe"><button class="btn delete" id="{{value}}">Supprimer</button></a>
                 {% else %}
                     {{value}}
                 {% endif %}
@@ -35,7 +35,8 @@
             {% endfor %}
         </table>
 
-        <a href="AjoutEquipe"><button class="btn">ajouter équipe</button></a>
+        <a href="/Equipe"><button class="btn">ajouter équipe</button></a>
+        <a href="/"><button class="btn">Retour</button></a>
     </div>
 
 
