@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Pokimac</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<script src="{{url_for('static', filename='app.js')}}"></script>
+	<script src="{{url_for('static', filename='app.js')}}" defer=""></script>
 
 </head>
 
@@ -15,9 +15,9 @@
 	<div class="container">
 
 		<label for="orderBy">Trier par: </label>
-		<select name="triPokimac" id="orderBy">
-			<option value="nom">ordre alphabétique</option>
-			<option value="type">type</option>
+		<select id="orderBy">
+			<option value="username">ordre alphabétique</option>
+			<option value="type_id">type</option>
 		</select>
 
 		<table>

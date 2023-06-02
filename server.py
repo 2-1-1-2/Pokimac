@@ -92,9 +92,28 @@ def requestSelectColumn(table, column, where="", value="", condition=False):
     return result
 
 
-@ app.route("/PokimacDresseur")
+@ app.route("/PokimacDresseur", methods=['GET','POST'])
 def afficherDresseur():
     affichage_dresseur = []
+
+    if request.method == 'POST':
+        column_tri = request.json['column']
+        print(column_tri)
+        mycursor = mydb.cursor()
+        mycursor.execute(requestSelectAllOrder("dresseurs",column_tri))
+        myresult = mycursor.fetchall()        
+        
+        for x in myresult:
+            x = list(x)
+            # x[0] = f'<a href="/supprimerPokimacDresseur?pokimac={x[0]}">X</a>'
+            if (x[2] == None):
+                x[2] = ""
+            x[3] = requestSelect_From("types", "name", "id", x[3])
+            x[5] = requestSelect_From("pokemons", "name", "id", x[5])
+            affichage_dresseur.append(x)
+        
+        return render_template("PokimacDresseur.html", PokimacDresseur_aff=affichage_dresseur)
+    
     mycursor = mydb.cursor()
     mycursor.execute(requestSelectAll("dresseurs"))
     myresult = mycursor.fetchall()
